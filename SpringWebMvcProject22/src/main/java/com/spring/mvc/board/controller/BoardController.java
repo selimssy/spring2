@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.mvc.board.model.BoardVO;
 import com.spring.mvc.board.service.IBoardService;
+import com.spring.mvc.commons.PageCreator;
 import com.spring.mvc.commons.PageVO;
 
 @Controller
@@ -43,7 +44,13 @@ public class BoardController {
 		List<BoardVO> list = service.getArticleListPaging(paging);
 		System.out.println("URL: /board/list GET -> result" + list.size());
 		System.out.println("페이지 번호 : " + paging.getPage() + "페이지, " + paging.getCountPerPage() + "개씩 출력");
+		
+		PageCreator pc = new PageCreator();
+		pc.setPaging(paging);
+		pc.setArticleTotalCount(service.countArticles());
+		
 		model.addAttribute("articles", list);
+		model.addAttribute("pc", pc);
 		
 		return "board/list";
 	}  

@@ -14,6 +14,10 @@ public interface IBoardService {
 	List<BoardVO> getArticleList();
 	// 페이징처리 이후 게시글 목록조회 기능
 	List<BoardVO> getArticleListPaging(PageVO paging);
+	
+	
+	// 총 게시물의 수 조회기능
+	Integer countArticles();
 
 	// 게시글 상세 조회기능
 	BoardVO getArticle(Integer boardNo);

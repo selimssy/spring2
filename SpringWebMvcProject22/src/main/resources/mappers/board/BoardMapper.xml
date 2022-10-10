@@ -46,6 +46,13 @@
 	</select>
 	
 	
+	<!-- 리턴타입이 VO일땐 resultMap, int String 등일땐 resultType(int, s(소문자)tring 이렇게)  -->
+	<select id="countArticles" resultType="int">
+		SELECT COUNT(*)
+		FROM mvc_board
+	</select>
+	
+	
 	
 	<select id="getArticle" resultMap="BoardMap">
 		SELECT *

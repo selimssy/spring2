@@ -34,6 +34,13 @@ public class BoardService implements IBoardService {
 		return mapper.getArticleListPaging(paging);
 	}
 	
+	
+	
+	@Override
+	public Integer countArticles() {
+		return mapper.countArticles();
+	}
+	
 
 	@Override
 	public BoardVO getArticle(Integer boardNo) {

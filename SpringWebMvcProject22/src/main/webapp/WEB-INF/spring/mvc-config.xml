@@ -11,7 +11,7 @@
 	    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
 	    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/spring?serverTimezone=Asia/Seoul" /> <!-- 중간에 spring은 db스키마 이름이다!! -->
 	    <property name="username" value="root" />
-	    <property name="password" value="stm1020" />
+	    <property name="password" value="mysql" />
 	</bean>
 		
 	<!-- 히카리 데이터 소스 빈 등록 -->
