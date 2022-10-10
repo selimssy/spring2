@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<!-- 히카리 커넥션풀 빈 등록 -->
+	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">  <!-- id는 내맘대로 -->
+	    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+	    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/spring?serverTimezone=Asia/Seoul" /> <!-- 중간에 spring은 db스키마 이름이다!! -->
+	    <property name="username" value="root" />
+	    <property name="password" value="stm1020" />
+	</bean>
+		
+	<!-- 히카리 데이터 소스 빈 등록 -->
+	<bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
+	    <constructor-arg ref="hikariConfig" />
+	</bean>
+		
+	<!-- JDBC 템플릿 클래스 빈 등록 -->  <!-- 마이바티스만 쓸거면 JDBC 템플릿은 등록 안해도 된다 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+	    <property name="dataSource" ref="ds" />
+	</bean>
+		
+	<!-- 마이바티스 SQL 동작을 위한 핵심객체 SqlSessionFactory 클래스 빈 등록 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	    <property name="dataSource" ref="ds"/>
+	    <property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml"/>
+	</bean>
+	
+	
+	<!-- 매퍼의 인터페이스를 스캔하는 설정 -->
+    <mybatis-spring:scan base-package="com.spring.mvc.board.repository"/>  <!-- 이건 프로젝트별로 바꿔줘야된다!! -->
+			
+</beans>
